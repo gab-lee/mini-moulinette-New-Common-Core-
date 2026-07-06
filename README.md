@@ -1,5 +1,10 @@
 # Mini-moulinette — New Common Core
 
+> [!WARNING]
+> **🚧 This project is NOT live yet — do not use it. 🚧**
+>
+> This fork is a work in progress. No Common Core tests exist yet, and the runner still only works for piscine exercises. Nothing here is ready for use — please don't clone or rely on it until this notice is removed. If you're looking for a working piscine test runner, use the original [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette) instead.
+
 ![mini-moulinette](mini-moulinette.jpg)
 
 Mini-moulinette is a test runner for 42 assignments. It runs a full suite of automated tests over an assignment with a single command, so you can check your code thoroughly *before* submitting — instead of finding out the hard way at evaluation.
@@ -80,6 +85,9 @@ Projects that are graphical, system-administration or web-based (Born2beroot, so
 
 
 ## Get Started
+
+> [!CAUTION]
+> **Not yet!** These instructions are kept here for when the project goes live. Until the work-in-progress notice at the top of this README is removed, there is nothing to use — the steps below will not give you a working Common Core test runner.
 
 > ***Warning***
 > Mini-moulinette is not 100% accurate — the tests may not cover every edge case the real moulinette does. Use it as a safety net, not a guarantee.
