@@ -47,7 +47,7 @@ Projects that are graphical, system-administration or web-based (Born2beroot, so
 
 ## Coverage Status
 
-### New Common Core
+> Looking for **piscine** tests (C00–C08)? This fork focuses on the New Common Core — head over to the original [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette) for the piscine test suites.
 
 | Circle | Project                    | Exercises / Parts to cover                 | Coverage        |
 | :----: | :------------------------- | :----------------------------------------- | :-------------: |
@@ -67,22 +67,6 @@ Projects that are graphical, system-administration or web-based (Born2beroot, so
 | 5      | webserv / ft_irc           | Basic protocol conformance                 | Planned         |
 | 5      | inception                  | —                                          | Out of scope (Docker infra) |
 | 6      | ft_transcendence           | —                                          | Out of scope (web project) |
-
-### Piscine (inherited from the original project)
-
-| Assignment | Coverage | Remarks                                             |
-| :--------- | :------: | :-------------------------------------------------- |
-| C00        | 9/9      |                                                     |
-| C01        | 9/9      |                                                     |
-| C02        | 12/13    |                                                     |
-| C03        | 6/6      |                                                     |
-| C04        | 6/6      |                                                     |
-| C05        | 8/9      | ex05, ex06, ex07 tests don't cover all edge cases   |
-| C06        | 4/4      |                                                     |
-| C07        | 6/6      | ex02, ex03 tests don't cover all edge cases         |
-| C08        | 6/6      | Tests mostly just cover compilation                 |
-| C09–C13    | 0        | Not covered                                         |
-
 
 ## Get Started
 
@@ -204,8 +188,8 @@ Contributions are very welcome — especially new test cases for Common Core pro
 
 ## Contributors
 
-- [Claude](https://claude.com) (Anthropic) — a huge contributor to the creation of this fork, helping build and maintain the Common Core test suites
-- [ChatGPT](https://chatgpt.com) — contributor to the original project
+- This fork is co-created with Claude Code, which helps build and maintain the Common Core test suites
+- ChatGPT — contributor to the original project
 
 
 ## License
