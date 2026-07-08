@@ -30,7 +30,11 @@ collect_tests()
     part_dir=$1
     if [ -f "$part_dir/order" ]; then
         while IFS= read -r f; do
-            [ -f "$part_dir/$f" ] && printf '%s\n' "$part_dir/$f"
+            if [ -f "$part_dir/$f" ]; then
+                printf '%s\n' "$part_dir/$f"
+            else
+                printf "${RED}file: %s is missing and cannot be compiled${DEFAULT}\n" "$f" >&2
+            fi
         done < "$part_dir/order"
         for f in "$part_dir"/*.c; do
             grep -qx "$(basename "$f")" "$part_dir/order" || printf '%s\n' "$f"
