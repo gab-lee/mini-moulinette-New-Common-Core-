@@ -1,57 +1,90 @@
-# Mini-moulinette
+# Mini-moulinette — New Common Core
+
+> [!WARNING]
+> **🚧 This project is NOT live yet — do not use it. 🚧**
+>
+> This fork is a work in progress. No Common Core tests exist yet — nothing here is ready for use, so please don't clone or rely on it until this notice is removed. If you're looking for a working piscine test runner, use the original [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette) instead.
 
 ![mini-moulinette](mini-moulinette.jpg)
 
-Mini-moulinette is a test runner for 42 assignments, providing automated tests for whole assignment with one command. The goal is to make thorough checking before submitting the assignments, with ease.
+Mini-moulinette is a test runner for 42 assignments. It runs a full suite of automated tests over an assignment with a single command, so you can check your code thoroughly *before* submitting — instead of finding out the hard way at evaluation.
+
+This repository is a fork that aims to extend mini-moulinette to the **New Common Core** curriculum (Circles 0–6).
 
 
-## Introduction
+## Credits
 
-This is now day 11 of piscine. I have wasted so many hours getting evaluated, doing evaluation, waiting for evaluation, only to come back redoing it again because I kept making silly mistakes. I wish I can check my code thoroughly before submitting, but that too, will take a lot of my time. This is why I build this so I can stop wasting my time and many others, and shut moulinette up with just a single submission.
+All credit for the original mini-moulinette goes to **[Khairul Haaziq](https://github.com/khairulhaaziq)** — the original project lives at [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette).
+
+This tool was incredibly useful during my piscine: it saved me countless hours of waiting for evaluations only to fail on silly mistakes. This fork exists because I want the same safety net while going through the Common Core. Thank you, Khairul! 🙏
 
 
 ## How Does It Work?
 
 ![screenshot](screenshot.jpg)
 
-- Mini moulinette runs through all the tests cases automatically, and checks if the test conditions are met.
-- It will then output the result.
-- The scores are based on 42's practice, where if easier/earlier questions are incorrect, the rest won't count.
+- Mini-moulinette runs through all the test cases for an assignment automatically and checks that the expected conditions are met.
+- It then prints a per-exercise pass/fail summary.
+- Scoring follows 42's practice: if an earlier exercise fails, the following ones don't count.
 
 
-# Updating
+## Roadmap
 
-Mini moulinette is updated daily, to update:
+The original project covers the piscine (C00–C08). The goal of this fork is to progressively add test suites for the Common Core, circle by circle:
 
-```bash
-cd ~/mini-moulinette
-```
+> [!NOTE]
+> **A caveat:** I haven't started the 42 Cursus yet — I'll only be starting in September. A lot of the project list and scope below is pieced together from PDFs found online, so it may not match the current curriculum exactly. If you're already in the programme and would like to contribute, access to up-to-date materials would also be greatly appreciated!
 
-```bash
-git pull
-```
+- [ ] Adapt the runner to detect Common Core project directories (not just `C00`–`C13`)
+- [ ] **Circle 0** — Libft (Part 1, Part 2, bonus list functions)
+- [ ] **Circle 1** — ft_printf, get_next_line (mandatory + bonus)
+- [ ] **Circle 2** — push_swap (operation validity + sort check), minitalk / pipex
+- [ ] **Circle 3** — philosophers (death timing / no-death scenarios), minishell (command comparison against bash)
+- [ ] **Circle 4** — CPP Modules 00–04
+- [ ] **Circle 5** — CPP Modules 05–09, webserv / ft_irc basic conformance tests
+- [ ] Exam practice mode (exam rank 02–06 style exercises)
 
+Projects that are graphical, system-administration or web-based (Born2beroot, so_long / FdF / fract-ol, NetPractice, cub3D / miniRT, inception, ft_transcendence) don't lend themselves well to automated unit testing, so they are out of scope for now — the table below still lists them for completeness.
+
+
+## Coverage Status
+
+> Looking for **piscine** tests (C00–C08)? This fork focuses on the New Common Core — head over to the original [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette) for the piscine test suites.
+
+| Circle | Project                    | Exercises / Parts to cover                 | Coverage        |
+| :----: | :------------------------- | :----------------------------------------- | :-------------: |
+| 0      | Libft                      | Part 1 (libc), Part 2 (additional), bonus  | Planned         |
+| 1      | ft_printf                  | Mandatory conversions + bonus flags        | Planned         |
+| 1      | get_next_line              | Mandatory + multiple-fd bonus              | Planned         |
+| 1      | Born2beroot                | —                                          | Out of scope (VM / sysadmin) |
+| 2      | push_swap                  | Operation validity, sort check, op count   | Planned         |
+| 2      | minitalk / pipex           | Signal transmission / pipe behaviour       | Planned         |
+| 2      | so_long / FdF / fract-ol   | —                                          | Out of scope (graphical) |
+| 3      | philosophers               | Death timing, no-death scenarios           | Planned         |
+| 3      | minishell                  | Output comparison against bash             | Planned         |
+| 4      | NetPractice                | —                                          | Out of scope (web exercise) |
+| 4      | cub3D / miniRT             | —                                          | Out of scope (graphical) |
+| 4      | CPP Modules 00–04          | Per-exercise behaviour tests               | Planned         |
+| 5      | CPP Modules 05–09          | Per-exercise behaviour tests               | Planned         |
+| 5      | webserv / ft_irc           | Basic protocol conformance                 | Planned         |
+| 5      | inception                  | —                                          | Out of scope (Docker infra) |
+| 6      | ft_transcendence           | —                                          | Out of scope (web project) |
 
 ## Get Started
 
+> [!CAUTION]
+> **Not yet!** These instructions are kept here for when the project goes live. Until the work-in-progress notice at the top of this README is removed, there is nothing to use — the steps below will not give you a working Common Core test runner.
+
 > ***Warning***
-> Mini moulinette is not 100% accurate, the tests may not cover every edge cases like moulinette. Use with caution.
+> Mini-moulinette is not 100% accurate — the tests may not cover every edge case the real moulinette does. Use it as a safety net, not a guarantee.
 
-1. Go to your root `~` directory.
-
-```bash
-cd ~
-```
-
-
-2. Clone the git there.
+1. Clone the repository into `~/mini-moulinette` (the runner expects this path):
 
 ```bash
-git clone https://github.com/khairulhaaziq/mini-moulinette.git
+git clone https://github.com/gab-lee/mini-moulinette-New-Common-Core-.git ~/mini-moulinette
 ```
 
-
-3. Now create an alias for it.
+2. Create an alias for it.
 
 - zsh:
 
@@ -65,51 +98,51 @@ echo "alias mini='~/mini-moulinette/mini-moul.sh'" >> ~/.zshrc && source ~/.zshr
 echo "alias mini='~/mini-moulinette/mini-moul.sh'" >> ~/.bashrc && source ~/.bashrc
 ```
 
-
-4. Go to your assignment directory where you want to test: e.g: C02 directory
+3. Go to the assignment directory you want to test, e.g. `C02`:
 
 ```bash
 cd C02
 ```
 
-
-5. Run using command `mini` with assignment number as argument. e.g: C02.
+4. Run `mini` with the assignment name as the argument:
 
 ```bash
 mini C02
 ```
 
-e.g: C03
+5. That's it — run it in every assignment directory where tests are provided. Have fun!
+
+
+## Updating
 
 ```bash
-mini C03
+cd ~/mini-moulinette && git pull
 ```
 
-6. You can now run it for every assignment directory, where tests are provided. Have fun!
 
 ## Debugging
 
-The error/success messages should be explicit enough. However sometimes you will get segmentation fault or your code doesn't compile
+The error/success messages should be explicit enough. However, sometimes you'll hit a segmentation fault or your code won't compile.
 
 ### If your code doesn't compile
 
-- Check the headers
-- Check if it contains main inside
-- Check if your function name is similar to a function from standard library, if it is then it will have problem
+- Check the headers.
+- Check whether the file contains a `main` — it shouldn't.
+- Check whether your function name clashes with a standard library function.
 
-### If you receive segmentation fault
+### If you get a segmentation fault
 
-- You need to find the test cases, go here:
+Look at the test cases directly:
 
 ```bash
 cd ~/mini-moulinette/mini-moul/tests
 ```
 
-The current directory contains all the test cases. Every test is in the file that is the same name as the function/program it is testing, e.g. C05/ex00/ft_iterative_factorial.c will contain test for C05 > ex00 > ft_iterative_factorial.c.
+Every test file has the same name as the function/program it tests, e.g. `C05/ex00/ft_iterative_factorial.c` contains the tests for C05 > ex00 > `ft_iterative_factorial.c`.
 
-The test cases are usually put in a list of array in this structure, e.g. for ft_iterative_factorial test:
+Test cases are declared as an array of structs, e.g. for `ft_iterative_factorial`:
 
-``` C
+```c
  t_test tests[] = {
         {
             .desc = "Factorial of 0",
@@ -120,11 +153,6 @@ The test cases are usually put in a list of array in this structure, e.g. for ft
             .desc = "Factorial of 1",
             .n = 1,
             .expected = 1,
-        },
-        {
-            .desc = "Factorial of 2",
-            .n = 2,
-            .expected = 2,
         },
         {
             .desc = "Factorial of 10",
@@ -142,49 +170,28 @@ The test cases are usually put in a list of array in this structure, e.g. for ft
 
 ## Customizing
 
-See the above, you can add more tests here. You need to manage your customization yourself when you pull for updates though.
-
-
-## Status
-
-| Assignment            | Coverage                   | Accuracy         | Remarks         |
-| :-------------------- | :------------------------: | :--------------: | :-------------- |
-| C00                   | 9/9                        | Not yet rated    |                 |
-| C01                   | 9/9                        | Not yet rated    |                 |
-| C02                   | 12/13                      | Not yet rated    |                 |
-| C03                   | 6/6                        | Not yet rated    |                 |
-| C04                   | 6/6                        | Not yet rated    |                 |
-| C05                   | 8/9                        | Not yet rated    | ex05, ex06, ex07 tests doesn't cover all edge cases |
-| C06                   | 4/4                        | Not yet rated    |                 |
-| C07                   | 6/6                        | Not yet rated    | ex02, ex03 tests doesn't cover all edge cases |
-| C08                   | 6/6                        | Not yet rated    | every tests mostly just cover compilation |
-| C09                   | 0/3                        | Not yet rated    | WIP             |
-| C10                   | 0/4                        | Not yet rated    | WIP             |
-| C11                   | 0/8                        | Not yet rated    | WIP             |
-| C12                   | 0/18                       | Not yet rated    |                 |
-| C13                   | 0/8                        | Not yet rated    |                 |
+You can add more test cases in the files above. Note that you'll need to manage your customizations yourself when pulling updates.
 
 
 ## Contributing
 
-We welcome contributions to mini-moulinette! Here are a few ways you can help out:
+Contributions are very welcome — especially new test cases for Common Core projects:
 
-- Testing: We rely on community feedback to ensure our tests are comprehensive and accurate. If you notice an error in one of our tests or have an idea for a new test case, please let us know! You can contact us via email at [email address] or on Discord at [Discord username]. We would greatly appreciate any feedback or suggestions you have.
-- Code: If you're interested in contributing to the codebase itself, we'd be happy to review any pull requests you submit. We have a few guidelines to ensure that our code is readable and maintainable, so please take a look at our contributing guidelines before you get started.
-- Features: Do you have an idea for a new feature that you think would be useful for mini-moulinette? We'd love to hear it! Please create an issue on our GitHub repository to start a discussion.
-- Feedback: If you've used mini-moulinette and have some feedback or suggestions for improvement, please let us know! Your input is valuable to us, and we're always looking for ways to make our test runner better.
-
-When contributing to mini-moulinette, please be sure to follow our code of conduct and our guidelines for submitting contributions. Thank you for your interest in our project, and we look forward to working with you!
+- **Tests**: If you spot an error in a test or have an idea for a new test case, open an issue or a pull request.
+- **Code**: Pull requests for the runner itself are happily reviewed.
+- **Materials**: I haven't started the Cursus yet (September!), so if you're already in the programme, sharing up-to-date subject materials would be greatly appreciated.
+- **Feedback**: If you've used this fork and have suggestions, let me know via an issue.
 
 
 ## Authors
 
-[Khairul Haaziq](https://github.com/khairulhaaziq)
+- Original author: [Khairul Haaziq](https://github.com/khairulhaaziq)
+- New Common Core fork: [gab-lee](https://github.com/gab-lee)
 
 
 ## Contributors
 
-[chatGPT](ai.com)
+- This fork is co-created with Claude Code, which helps build and maintain the Common Core test suites
 
 
 ## License
