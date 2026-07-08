@@ -120,7 +120,7 @@ print_header()
     printf "       ░    ░           ░  ░  \n"
     printf "${DEFAULT}"
     printf "${BLUE}Mini moulinette ${DEFAULT}version 0.0.1 8 July 2026.\n"
-    printf "${BLUE}Written by ${DEFAULT}Gabriel Lee.\n"
+    printf "${BLUE}Written by ${DEFAULT}gab-Lee.\n"
     space
 }
 
