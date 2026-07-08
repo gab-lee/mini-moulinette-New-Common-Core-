@@ -23,6 +23,23 @@ result=""
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 dirname_found=0
 
+# List a part's test files, honoring an optional 'order' file (one filename
+# per line, subject order). Files missing from 'order' are appended after.
+collect_tests()
+{
+    part_dir=$1
+    if [ -f "$part_dir/order" ]; then
+        while IFS= read -r f; do
+            [ -f "$part_dir/$f" ] && printf '%s\n' "$part_dir/$f"
+        done < "$part_dir/order"
+        for f in "$part_dir"/*.c; do
+            grep -qx "$(basename "$f")" "$part_dir/order" || printf '%s\n' "$f"
+        done
+    else
+        ls "$part_dir"/*.c 2> /dev/null
+    fi
+}
+
 main()
 {
     start_time=$(date +%s)
@@ -58,10 +75,11 @@ main()
                 questions=$((questions+1))
                 score_false=0
                 assignment_name="$(basename "$assignment")"
-                test_name="$(ls $assignment/*.c | head -n 1)"
+                test_files="$(collect_tests "$assignment")"
+                test_name="$(echo "$test_files" | head -n 1)"
                 test_name="$(basename "$test_name")"
-                
-                if cc -Wall -Werror -Wextra -o test1 $(ls $assignment/*.c | head -n 1); then
+
+                if cc -Wall -Werror -Wextra -o test1 "$(echo "$test_files" | head -n 1)"; then
                     rm test1
                     checks=$((checks+1))
                     passed=$((passed+1))
@@ -69,7 +87,7 @@ main()
                     if [ -d "$assignment" ]; then
                         index2=0
                         
-                        for test in $assignment/*.c; do
+                        for test in $test_files; do
                             ((index2++))
                             checks=$((checks+1))
                             
