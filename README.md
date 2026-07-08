@@ -14,7 +14,7 @@ This repository is a fork that aims to extend mini-moulinette to the **New Commo
 
 ## Credits
 
-All credit for the original mini-moulinette goes to **[Khairul Haaziq](https://github.com/khairulhaaziq)** — the original project lives at [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette).
+All credit for the original mini-moulinette goes to **[Khairul Haaziq](https://github.com/k11q)** — the original project lives at [khairulhaaziq/mini-moulinette](https://github.com/khairulhaaziq/mini-moulinette).
 
 This tool was incredibly useful during my piscine: it saved me countless hours of waiting for evaluations only to fail on silly mistakes. This fork exists because I want the same safety net while going through the Common Core. Thank you, Khairul! 🙏
 
