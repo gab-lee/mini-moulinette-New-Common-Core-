@@ -44,6 +44,45 @@ collect_tests()
     fi
 }
 
+# Compile each of the student's ft_*.c once into an object file. Tests
+# declare prototypes (tests/<suite>/libft_proto.h) and link against these
+# objects, so the student's code is never #include-d into a test. A file
+# that doesn't compile keeps its error in $OBJ_DIR/<name>.err and its test
+# reports it.
+OBJ_DIR=""
+student_objs=()
+build_student_objects()
+{
+    OBJ_DIR="$SCRIPT_DIR/.student_objs"
+    rm -rf "$OBJ_DIR"
+    mkdir -p "$OBJ_DIR"
+    student_objs=()
+    for src in ../ft_*.c; do
+        [ -f "$src" ] || continue
+        name="$(basename "${src%.c}")"
+        if cc -Wall -Werror -Wextra -c "$src" -o "$OBJ_DIR/$name.o" 2> "$OBJ_DIR/$name.err"; then
+            rm -f "$OBJ_DIR/$name.err"
+            student_objs+=("$OBJ_DIR/$name.o")
+        fi
+    done
+}
+
+# Path of the saved compile error for a function's source, if it failed
+# to build (subject allows bonus files to carry a _bonus suffix).
+student_compile_error()
+{
+    if [ -f "$OBJ_DIR/$1.err" ]; then
+        printf '%s' "$OBJ_DIR/$1.err"
+    elif [ -f "$OBJ_DIR/$1_bonus.err" ]; then
+        printf '%s' "$OBJ_DIR/$1_bonus.err"
+    fi
+}
+
+student_src_exists()
+{
+    [ -f "../$1.c" ] || [ -f "../$1_bonus.c" ]
+}
+
 main()
 {
     start_time=$(date +%s)
@@ -62,6 +101,7 @@ main()
             space
             dirname_found=1
             index=0
+            build_student_objects
 
             # Run parts in subject order (libc, additional, bonus), then anything else
             exercise_dirs=""
@@ -86,8 +126,18 @@ main()
                 for test in $test_files; do
                     checks=$((checks+1))
                     fn_name="$(basename "${test%.c}")"
+                    src_err="$(student_compile_error "$fn_name")"
 
-                    if cc -Wall -Werror -Wextra -o "${test%.c}" "$test" 2> compile_error.tmp; then
+                    if [ -n "$src_err" ]; then
+                        break_score=1
+                        score_false=1
+                        printf " ${BG_RED}${BOLD} FAIL ${DEFAULT} ${fn_name} ${RED}(your ${fn_name}.c cannot compile)${DEFAULT}\n"
+                        sed 's/^/    /' "$src_err" | head -15
+                    elif ! student_src_exists "$fn_name"; then
+                        break_score=1
+                        score_false=1
+                        printf " ${BG_RED}${BOLD} FAIL ${DEFAULT} ${fn_name} ${RED}(no ${fn_name}.c found in your project)${DEFAULT}\n"
+                    elif cc -Wall -Werror -Wextra -o "${test%.c}" "$test" "${student_objs[@]}" 2> compile_error.tmp; then
                         test_output="$("./${test%.c}" 2>&1)"
                         if [ $? -eq 0 ]; then
                             passed=$((passed+1))
@@ -120,6 +170,7 @@ main()
         printf "Available assignment tests: ${PURPLE}$available_assignments${DEFAULT}\n"
         exit 1
     fi
+    [ -n "$OBJ_DIR" ] && rm -rf "$OBJ_DIR"
     print_footer
 }
 
