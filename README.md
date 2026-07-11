@@ -70,6 +70,11 @@ Projects that are graphical, system-administration or web-based (Born2beroot, so
 | 5      | inception                  | —                                          | Out of scope (Docker infra) | —                        |
 | 6      | ft_transcendence           | —                                          | Out of scope (web project) | —                         |
 
+> [!NOTE]
+> **Known strictness exceptions.** The libc tests compare against the *real* libc, which is stricter than 42's moulinette in a few corners. These cases print a yellow `[!]` warning instead of failing the function:
+> - `ft_strchr` / `ft_strrchr` searching for an extended character (e.g. 233): implementations that compare as `unsigned char` return NULL where libc finds the byte.
+> - `ft_calloc(SIZE_MAX, SIZE_MAX)`: the real calloc returns NULL on `count * size` overflow, but passing this is not required.
+
 ## Get Started
 
 > [!CAUTION]
