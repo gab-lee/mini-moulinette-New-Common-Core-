@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Single source of truth for the version banner in test.sh. Follows SemVer
+# (MAJOR.MINOR.PATCH); bump it on every PR merge to main — see CLAUDE.md
+# "Versioning".
+readonly VERSION="0.1.0"
+
 #constants
 readonly GREEN='\033[38;5;84m'
 readonly RED='\033[38;5;197m'

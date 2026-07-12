@@ -52,3 +52,12 @@ There is no build step; everything runs via bash + `cc`.
 **Adding a new assignment/part**: create `mini-moul/tests/<assignment>/<part>/`, add `.c`/`.sh` test files (optionally an `order` file), and if needed a `prototypes.sh` sourcing `proto_check.sh`. `test.sh` picks it up automatically — no registration needed elsewhere.
 
 **Known strictness exceptions**: some libc-comparison tests are intentionally stricter than the real 42 moulinette (e.g. `ft_strchr`/`ft_strrchr` with extended chars, `ft_calloc(SIZE_MAX, SIZE_MAX)`); these print a `[!]` warning rather than failing. See README "Coverage Status" for the current list — don't silently loosen or tighten these without updating both the test and the README.
+
+## Versioning
+
+`mini-moul/config.sh` defines `VERSION` (SemVer `MAJOR.MINOR.PATCH`) — the single source of truth, printed in `test.sh`'s banner. **Every PR merged to `main` must bump it and add an entry to `CHANGELOG.md`**, in the same commit/PR as the change:
+- `PATCH` — bug fixes, test corrections, wording/output tweaks.
+- `MINOR` — new assignment/part test coverage, new features (e.g. the update-notification check), backwards-compatible additions.
+- `MAJOR` — reserved; stays `0.x.y` until the Common Core suites are actually live (see "What this is").
+
+`CHANGELOG.md` follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/): move the relevant bullets out of `[Unreleased]` into a new dated `[MAJOR.MINOR.PATCH] - YYYY-MM-DD` section (categorized under Added/Changed/Fixed/Removed) as part of the same PR that bumps `VERSION`.
