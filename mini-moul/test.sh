@@ -264,7 +264,6 @@ print_footer()
     end_time=$(date +%s)
     elapsed_time=$(expr $end_time - $start_time)
     printf "${GREY}Test completed. ${PINK}Total elapsed time: ${elapsed_time}s${DEFAULT}.\n"
-    printf "${BLUE}Mini moulinette is updated daily. Please remember to git pull today!\n${DEFAULT}"
     space
 }
 
