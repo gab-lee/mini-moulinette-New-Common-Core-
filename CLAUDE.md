@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Mini-moulinette is a bash-based test runner for 42 School assignments. This fork extends the original piscine-focused tool to the New Common Core curriculum (Circles 0–6). It is **not live yet** — no Common Core test suites are complete (only `libft` is in progress).
+Mini-moulinette is a bash-based test runner for 42 School assignments. This fork extends the original piscine-focused tool to the New Common Core curriculum (Circles 0–6). It is **live** — Circle 0 (`libft`) is complete; the rest of the curriculum is being added circle by circle (see README "Roadmap").
 
 ## Running tests
 
@@ -14,7 +14,7 @@ There is no build step; everything runs via bash + `cc`.
   ```bash
   ~/mini-moulinette/mini-moul.sh
   ```
-  This copies `mini-moul/` into the current directory, detects the assignment from the directory's basename (must match a folder in `mini-moul/tests/`, and not contain `(archive)`), runs norminette if installed, executes `test.sh <assignment>`, then cleans up.
+  This copies `mini-moul/` into the current directory, detects the assignment from the directory's basename (must match a folder in `mini-moul/tests/`, and not contain `(archive)`), executes `test.sh <assignment>`, then cleans up. norminette (if installed) runs as an ordinary `setup`-part test case, not a separate step — see the `norminette_check.sh` bullet below.
 
 - To run directly without the copy/cleanup wrapper (useful while iterating on tests), from inside `mini-moul/`:
   ```bash
@@ -47,7 +47,9 @@ There is no build step; everything runs via bash + `cc`.
 
 **`mini-moul/tests/<assignment>/*/prototypes.sh`** — setup-part scripts that call `check_prototypes` (defined in `mini-moul/utils/proto_check.sh`) with `"name|pointer-decl|subject prototype"` triples. Each entry compiles a tiny probe assigning the student's function to a function-pointer of the exact subject-declared type; because C doesn't check types at link time, this is the only place a wrong signature (return type, param types, missing `const`, ...) gets caught, distinct from behavioral tests.
 
-**`mini-moul/utils/`** — shared C headers/shell helpers included by tests across assignments (`constants.h`, `libc_compare.h`, `proto_check.sh`). Prefer extending these over duplicating comparison logic in individual test files.
+**`mini-moul/tests/<assignment>/setup/norminette.sh`** — sources `check_norminette` (defined in `mini-moul/utils/norminette_check.sh`) to run norminette as an ordinary setup test case: a single PASS/FAIL line, no raw norm-error output even on failure (run `norminette` yourself for details), and a graceful skip (still PASS) when norminette isn't installed. Any assignment's `setup` part can add the same check by sourcing the helper.
+
+**`mini-moul/utils/`** — shared C headers/shell helpers included by tests across assignments (`constants.h`, `libc_compare.h`, `proto_check.sh`, `norminette_check.sh`). Prefer extending these over duplicating comparison logic in individual test files.
 
 **Adding a new assignment/part**: create `mini-moul/tests/<assignment>/<part>/`, add `.c`/`.sh` test files (optionally an `order` file), and if needed a `prototypes.sh` sourcing `proto_check.sh`. `test.sh` picks it up automatically — no registration needed elsewhere.
 
@@ -58,6 +60,6 @@ There is no build step; everything runs via bash + `cc`.
 `mini-moul/config.sh` defines `VERSION` (SemVer `MAJOR.MINOR.PATCH`) — the single source of truth, printed in `test.sh`'s banner. **Every PR merged to `main` must bump it and add an entry to `CHANGELOG.md`**, in the same commit/PR as the change:
 - `PATCH` — bug fixes, test corrections, wording/output tweaks.
 - `MINOR` — new assignment/part test coverage, new features (e.g. the update-notification check), backwards-compatible additions.
-- `MAJOR` — reserved; stays `0.x.y` until the Common Core suites are actually live (see "What this is").
+- `MAJOR` — breaking changes to the runner/test framework (e.g. a scoring-model or test-file-format change that invalidates existing assignments), or a curriculum-completion milestone (the project reached `1.0.0` when it went live with Circle 0 complete).
 
 `CHANGELOG.md` follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/): move the relevant bullets out of `[Unreleased]` into a new dated `[MAJOR.MINOR.PATCH] - YYYY-MM-DD` section (categorized under Added/Changed/Fixed/Removed) as part of the same PR that bumps `VERSION`.
