@@ -9,6 +9,14 @@ versioning follows [Semantic Versioning](https://semver.org/) (see
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-07-18
+
+### Fixed
+- `mini-moul.sh` now runs `norminette` like a test case, printing a single
+  `PASS`/`FAIL` line instead of dumping all norm errors unconditionally.
+  `FAIL` (and the full norminette output) only shows when norminette reports
+  at least one error.
+
 ## [0.1.0] - 2026-07-12
 
 ### Added
