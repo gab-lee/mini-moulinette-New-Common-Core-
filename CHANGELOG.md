@@ -9,6 +9,21 @@ versioning follows [Semantic Versioning](https://semver.org/) (see
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-18
+
+### Added
+- `mini-moul/utils/norminette_check.sh`, a shared `check_norminette` helper
+  (mirrors `proto_check.sh`) that any assignment's `setup` part can source to
+  add a norminette check as an ordinary test case.
+- `tests/libft/setup/norminette.sh`, using the helper above — norminette now
+  runs as part of `libft`'s normal `setup` checks instead of a separate step.
+
+### Changed
+- `mini-moul.sh` no longer runs norminette as a standalone pre-step with its
+  own PASS/FAIL line before the test banner; that was distracting and
+  disconnected from the rest of the run. norminette now only shows up as a
+  regular `setup` test, folded into the normal PASS/FAIL list and scoring.
+
 ## [0.2.0] - 2026-07-18
 
 ### Added

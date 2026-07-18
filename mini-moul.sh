@@ -12,21 +12,6 @@ function handle_sigint {
   exit 1
 }
 
-run_norminette() {
-  if command -v norminette &> /dev/null; then
-    local norm_output
-    norm_output="$(norminette 2>&1)"
-    if [ $? -eq 0 ]; then
-      printf " ${BG_GREEN}${BLACK}${BOLD} PASS ${DEFAULT} norminette\n"
-    else
-      printf " ${BG_RED}${BOLD} FAIL ${DEFAULT} norminette\n"
-      printf '%s\n' "$norm_output"
-    fi
-  else
-    echo "norminette not found, skipping norminette checks"
-  fi
-}
-
 # Fetches origin and, if the local mini-moulinette clone is behind, asks the
 # user whether to fast-forward before running any checks.
 check_for_updates() {
@@ -91,7 +76,6 @@ check_for_updates
 
 if detect_assignment; then
   cp -R ~/mini-moulinette/mini-moul mini-moul
-  run_norminette
   trap handle_sigint SIGINT
   cd mini-moul
   ./test.sh "$assignment"
