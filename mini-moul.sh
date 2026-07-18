@@ -14,7 +14,14 @@ function handle_sigint {
 
 run_norminette() {
   if command -v norminette &> /dev/null; then
-    norminette
+    local norm_output
+    norm_output="$(norminette 2>&1)"
+    if [ $? -eq 0 ]; then
+      printf " ${BG_GREEN}${BLACK}${BOLD} PASS ${DEFAULT} norminette\n"
+    else
+      printf " ${BG_RED}${BOLD} FAIL ${DEFAULT} norminette\n"
+      printf '%s\n' "$norm_output"
+    fi
   else
     echo "norminette not found, skipping norminette checks"
   fi
